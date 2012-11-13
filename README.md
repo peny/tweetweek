@@ -1,4 +1,4 @@
 tweetweek
 =========
 
-When to tweet to maximize retweets and likes
+When to tweet to maximize retweets and favorites
