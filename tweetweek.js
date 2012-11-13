@@ -31,7 +31,6 @@ function getTimeline(screen_name, callback) {
     });
 
     var data = _.map(hours, function(tweets, num) {
-      console.log(tweets);
       var retweets = 0;
       var favorites = 0;
       retweets += (parseInt(_.pluck(tweets, 'retweet_count'), 10) || 0);
@@ -92,13 +91,12 @@ http.createServer(function(req,res){
         "<script>function renderGraph(){$.getJSON('/user/'+$('#search').val()+'.json',function(){}).success(function(data){"+
         "var total = _.map(data,function(hours){return [hours.hour,hours.total_tweets];});"+
         "var rts = _.map(data,function(hours){return [hours.hour,hours.retweets];});"+
-        "$.plot($('#graph'),[{label: 'retweets', data: rts},{label: 'total tweets', data: total}],{series:{ lines: {show: true}, points: {show: true}}, xaxis: { ticks: [[0, 'Sunday'], ,[12, '12:00'], [24, 'Monday'],[36,'12:00'],[48, 'Tuesday'],[60, '12:00'],[72,'Wednesday'],[84,'12:00'],[96, 'Thursday'],[108,'12:00'],[120,'Friday'],[132,'12:00'],[144,'Saturday'],[156,'12:00']]}});"+
+        "$.plot($('#graph'),[{label: 'tweets', data: total},{label: 'retweets', data: rts}],{series:{ lines: {show: true}, points: {show: true}}, xaxis: { ticks: [[0, 'Sunday'], ,[12, '12:00'], [24, 'Monday'],[36,'12:00'],[48, 'Tuesday'],[60, '12:00'],[72,'Wednesday'],[84,'12:00'],[96, 'Thursday'],[108,'12:00'],[120,'Friday'],[132,'12:00'],[144,'Saturday'],[156,'12:00']]}});"+
         "}).error(function(data){if(data.status === 500){$('#graph').prepend(data.responseText);}})}</script>"+
         "</div></body></html>";
       res.end(html);
     } else if((/^\/user\/\w{1,30}\.json$/i).test(req.url)){
       var user = req.url.match(/\w+/gi);
-      console.log(user);
       user = user[1];
       getTimeline(user,function(err,data){
         if(err){  
