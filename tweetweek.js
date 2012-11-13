@@ -5,6 +5,7 @@ http.createServer(function(req,res){
   if(req.method === 'GET'){
     if(req.url === '/'){
         res.writeHead(200, {'Content-Type': 'text/html'});
+        //More files === less fun
         var html = "<!DOCTYPE html><html>"+
             "<head><title>Tweet Week</title>"+
             "<link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-responsive.no-icons.min.css' rel='stylesheet'>"+
