@@ -1,0 +1,19 @@
+{
+    "author": "Petter Nyman (http://pttr.se)",
+    "name": "Tweet Week",
+    "description": "Get to know when to tweet to maximize retweets",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/peny/tweetweek.git"
+    },
+    "dependencies": {
+        "underscore" : "1.4.2"
+    },
+    "devDependencies": {},
+    "optionalDependencies": {},
+    "engines": {
+        "node": "*"
+    },
+    "main": "tweetweek.js"
+}
