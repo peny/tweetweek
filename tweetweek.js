@@ -88,6 +88,7 @@ http.createServer(function(req,res){
         "<button class='btn' onclick='renderGraph()'>Search!</button>"+
         "</div></div>"+
         "<div id='graph' style='width:1100px; height: 400px;'></div>"+
+        "A <a href='http://pttr.se'>pttr</a> production</p>"+
         "<script>function renderGraph(){$.getJSON('/user/'+$('#search').val()+'.json',function(){}).success(function(data){"+
         "var total = _.map(data,function(hours){return [hours.hour,hours.total_tweets];});"+
         "var rts = _.map(data,function(hours){return [hours.hour,hours.retweets];});"+
