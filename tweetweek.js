@@ -67,6 +67,7 @@ function getTwitterData(screen_name, callback){
 }
 
 http.createServer(function(req,res){
+  console.log(req.url);
     if(req.url === '/'){
       res.writeHead(200, {'Content-Type': 'text/html'});
       //More files === less fun
@@ -88,11 +89,19 @@ http.createServer(function(req,res){
         "<button class='btn' onclick='renderGraph()'>Search!</button>"+
         "</div></div>"+
         "<div id='graph' style='width:1100px; height: 400px;'></div>"+
+        "<div id='daygraph' style='width:1100px; height: 400px;'></div>"+
         "A <a href='http://pttr.se'>pttr</a> production</p>"+
         "<script>function renderGraph(){$.getJSON('/user/'+$('#search').val()+'.json',function(){}).success(function(data){"+
         "var total = _.map(data,function(hours){return [hours.hour,hours.total_tweets];});"+
         "var rts = _.map(data,function(hours){return [hours.hour,hours.retweets];});"+
         "$.plot($('#graph'),[{label: 'tweets', data: total},{label: 'retweets', data: rts}],{series:{ lines: {show: true}, points: {show: true}}, xaxis: { ticks: [[0, 'Sunday'], ,[12, '12:00'], [24, 'Monday'],[36,'12:00'],[48, 'Tuesday'],[60, '12:00'],[72,'Wednesday'],[84,'12:00'],[96, 'Thursday'],[108,'12:00'],[120,'Friday'],[132,'12:00'],[144,'Saturday'],[156,'12:00']]}});"+
+        "var daytotal = _.map(data,function(hours){return [hours.hour%24,hours.total_tweets];});"+
+        "var grouped = _.groupBy(daytotal,function(hour){ return hour[0];});"+
+        "daytotal = _.map(_.keys(grouped),function(hour){var current = grouped[hour]; return [current[0][0],_.reduce(current,function(memo,num){ return memo+num[1];},0)];});"+
+        "var dayrts = _.map(data,function(hours){return [hours.hour%24,hours.retweets];});"+
+        "grouped = _.groupBy(dayrts,function(hour){ return hour[0];});"+
+        "dayrts = _.map(_.keys(grouped),function(hour){var current = grouped[hour]; return [current[0][0],_.reduce(current,function(memo,num){ return memo+num[1];},0)];});"+
+        "$.plot($('#daygraph'),[{label: 'tweets', data: daytotal},{label: 'retweets', data: dayrts}],{series:{ lines: {show: true}, points: {show: true}}, xaxis: { ticks: [[0, '0:00'], ,[6, '6:00'], [12, '12:00'],[18,'18:00'],[23, '23:00']]}});"+
         "}).error(function(data){if(data.status === 500){$('#graph').prepend(data.responseText);}})}</script>"+
         "</div></body></html>";
       res.end(html);
