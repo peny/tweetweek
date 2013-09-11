@@ -1,8 +1,12 @@
-tweetweek
-=========
+# tweetweek #
 
-When to tweet to maximize retweets
+When you should tweet to maximize retweets
 
-run tweetweek.js
-load up 127.0.0.1:8042
-get delicious retweets
+## How to get started ## 
+
+    $ npm install
+    $ node tweetweek.js 
+
+Load up 127.0.0.1:8042 
+
+Get delicious retweets
