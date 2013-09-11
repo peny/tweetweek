@@ -55,7 +55,7 @@ function getTimeline(screen_name, callback) {
 function getTwitterData(screen_name, callback){
   http.get('http://api.twitter.com/1/statuses/user_timeline.json?count=200&trim_user=true&screen_name=' + screen_name, function(res) {
     var err = null;
-    console.log(err,res)html;
+    console.log(err,res);
     if(res.statusCode !== 200){
       err = res.statusCode;
     }
