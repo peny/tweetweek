@@ -81,7 +81,7 @@ http.createServer(function(req,res){
       getTimeline(user,function(err,data){
         if(err){
           res.writeHead(500, {'Content-Type': 'text/plain'});
-          res.end("<h2>You killed it!</h2><h3>The user probably doesn't exist</h3><iframe width='560' height='315' src='http://www.youtube.com/embed/CqyEUAoKcz0?start=354&autoplay=1' frameborder='0' allowfullscreen></iframe>");
+          res.end("<h2>You killed it!</h2><h3>The user probably doesn't exist</h3><iframe width='560' height='315' src='//www.youtube.com/embed/CqyEUAoKcz0?start=354&autoplay=1' frameborder='0' allowfullscreen></iframe>");
         } else {
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.end(JSON.stringify(data));
